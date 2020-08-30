@@ -1,6 +1,8 @@
 package com.example.demoArko.dao;
 
 import com.example.demoArko.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,6 +12,13 @@ import java.util.UUID;
 @Repository("postgres")
 public class PersonDataAccessService implements PersonDao{
 
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public PersonDataAccessService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public int insertPerson(UUID id, Person person) {
         return 0;
@@ -17,7 +26,10 @@ public class PersonDataAccessService implements PersonDao{
 
     @Override
     public int deletePersonId(UUID id) {
-        return 0;
+        String sql = "" +
+                "DELETE FROM student " +
+                "WHERE id = ?";
+        return jdbcTemplate.update(sql, id);
     }
 
     @Override
@@ -27,11 +39,23 @@ public class PersonDataAccessService implements PersonDao{
 
     @Override
     public Optional<Person> selectPersonById(UUID id) {
-        return Optional.empty();
+        final String sql = "SELECT id,name FROM person WHERE id = ?";
+
+        Person person = jdbcTemplate.queryForObject(sql,new Object[]{id},(resultSet, i) -> {
+            UUID personId = UUID.fromString(resultSet.getString("id"));
+            String name = resultSet.getString("name");
+            return new Person(personId,name);
+        });
+        return  Optional.ofNullable(person);
     }
 
     @Override
     public List<Person> selectAllPeople() {
-        return List.of(new Person(UUID.randomUUID(),"FROM POSTGRES DB"));
+        final String sql = "SELECT id, name FROM person";
+        return jdbcTemplate.query(sql,((resultSet, i) -> {
+            return new Person(
+                    UUID.fromString(resultSet.getString("id")),
+                    resultSet.getString("name"));
+        }));
     }
 }
