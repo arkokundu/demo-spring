@@ -1,0 +1,7 @@
+#This is where you define the connection details to your database
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/arkodb
+    username: postgres
+    password: password
+    pool-size: 30
