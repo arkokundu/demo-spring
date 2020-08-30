@@ -42,4 +42,9 @@ public class PersonController {
     public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate){
         personService.updatePerson(id, personToUpdate);
     }
+
+    @PutMapping(path = "{id}/add/{amount}")
+    public void addAmount(@PathVariable("id") UUID id, @PathVariable("balance") int amount){
+        personService.addAmount(id, amount);
+    }
 }

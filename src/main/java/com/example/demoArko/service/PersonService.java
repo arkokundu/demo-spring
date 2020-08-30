@@ -40,4 +40,15 @@ public class PersonService {
     public int updatePerson(UUID id, Person newPerson){
         return personDao.updatePersonId(id,newPerson);
     }
+
+    public String addAmount(UUID id, int amount){
+        Optional<Person> personOptional = personDao.selectPersonById(id);
+        if (!personOptional.isEmpty()){
+            Person person = personOptional.get();
+            person = new Person(person.getId(),person.getName(),person.getBalance()+amount);
+            personDao.insertPerson(person.getId(),person);
+            return "";
+        }
+        return "Person doesn't exist with id .." + id.toString();
+    }
 }

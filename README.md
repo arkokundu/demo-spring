@@ -11,7 +11,8 @@ docker port
 ```
 3. Enter into the container by passing the container id
 ```
-docker exec -it a0e07f6fa592 bin/bash
+docker container ls
+docker exec -it <container-id> bin/bash
 psql -U postgres
 \l 
 ```
@@ -22,6 +23,18 @@ CREATE DATABASE arkodb;
 ```
 5. Open the terminal in Intellij IDEA and run DemoApplication
 
+6. Generate UUIDS 
+```
+CREATE EXTENSION "uuid-ossp";
+SELECT uuid_generate_v4();
+```
+7. Custom queries :
+```
+INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Charles Xavier',20000);
+INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Logan',30000);
+INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Magneto',45000);
+INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Cyclops',0000);
+```
 
 
 
