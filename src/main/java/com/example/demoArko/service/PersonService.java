@@ -41,7 +41,7 @@ public class PersonService {
         return personDao.updatePersonId(id,newPerson);
     }
 
-    public String addAmount(UUID id, int amount){
+    public String depositAmount(UUID id, int amount){
         Optional<Person> personOptional = personDao.selectPersonById(id);
         if (!personOptional.isEmpty()){
             Person person = personOptional.get();
@@ -51,4 +51,19 @@ public class PersonService {
         }
         return "Person doesn't exist with id .." + id.toString();
     }
+
+    public String withdrawAmount(UUID id, int amount){
+        Optional<Person> personOptional = personDao.selectPersonById(id);
+        if (!personOptional.isEmpty()){
+            Person person = personOptional.get();
+            person = new Person(person.getId(),person.getName(),person.getBalance()-amount);
+            if (person.getBalance() < 0)
+                return "BALANCE TOO LOW!!";
+            personDao.insertPerson(person.getId(),person);
+            return "";
+        }
+        return "Person doesn't exist with id .." + id.toString();
+    }
+
+
 }

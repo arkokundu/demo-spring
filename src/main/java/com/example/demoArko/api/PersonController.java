@@ -43,8 +43,13 @@ public class PersonController {
         personService.updatePerson(id, personToUpdate);
     }
 
-    @PutMapping(path = "{id}/add/{amount}")
-    public void addAmount(@PathVariable("id") UUID id, @PathVariable("balance") int amount){
-        personService.addAmount(id, amount);
+    @PutMapping(path = "{id}/deposit/{amount}")
+    public void depositAmount(@PathVariable("id") UUID id, @PathVariable("balance") int amount){
+        personService.depositAmount(id, amount);
+    }
+
+    @PutMapping(path = "{id}/withdraw/{amount}")
+    public void withdrawAmount(@PathVariable("id") UUID id, @PathVariable("balance") int amount){
+        personService.withdrawAmount(id, amount);
     }
 }
