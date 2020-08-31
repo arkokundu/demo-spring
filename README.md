@@ -33,7 +33,7 @@ SELECT uuid_generate_v4();
 INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Charles Xavier',20000);
 INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Logan',30000);
 INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Magneto',45000);
-INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Cyclops',0000);
+INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Cyclops',10000);
 ```
 
 
