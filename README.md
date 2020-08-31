@@ -1,4 +1,4 @@
-# Basic CRUD operations using Spring Boot and Flyway Database Migration
+# Simple banking app with credit and debit transactions using Spring Boot, PostgreSQL relational DB, and Flyway DB migration
 
 ## Instructions for quick setup - 
 1. Spin up Postgres database instance using Docker
