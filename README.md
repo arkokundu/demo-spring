@@ -1,4 +1,4 @@
-# Basic CRUD operations using Spring Boot and Flybase Database Migration
+# Basic CRUD operations using Spring Boot and Flyway Database Migration
 
 ## Instructions for quick setup - 
 1. Spin up Postgres database instance using Docker
