@@ -3,11 +3,11 @@
 ## Instructions for quick setup - 
 1. Spin up Postgres database instance using Docker
 ```
-docker container run -d --name=postgres-spring-boot -p 5433:5432 -e POSTGRES_PASSWORD=password -e PGDATA=/pgdata -v /pgdata:/pgdata postgres:11.4
+docker run --name postgres-spring -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:alpine
 ```
 2. Exposing container port to the outside world on localhost:5432
 ```
-docker port 
+docker port postgres-spring
 ```
 3. Enter into the container by passing the container id
 ```
@@ -21,13 +21,13 @@ psql -U postgres
 CREATE DATABASE arkodb;
 \c arkodb
 ```
-5. Open the terminal in Intellij IDEA and run DemoApplication
-
-6. Generate UUIDS 
+5. Generate UUIDS 
 ```
 CREATE EXTENSION "uuid-ossp";
 SELECT uuid_generate_v4();
 ```
+6. Open the terminal in Intellij IDEA and run DemoArkoApplication
+
 7. Custom queries :
 ```
 INSERT INTO person(id,name,balance) VALUES (uuid_generate_v4(),'Charles Xavier',20000);
